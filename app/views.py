@@ -65,13 +65,13 @@ def logout(request):
 def placements(request):
     
     all_placements = Placement.objects.all()
-
+    #all_placements.delete()
     paginator = Paginator(all_placements, 18)
     page = request.GET.get('page')
     placements = paginator.get_page(page)
 
     context = {'placements': placements}
-    print(context)
+    print("context",all_placements)
     return render(request, 'placements.html', context)
 
 
@@ -182,16 +182,14 @@ def createbiddings(request):
         print("form",form)
         # check whether it's valid:
         placement_title=request.POST.get('placement_title')
-        placement_slug=request.POST.get('placement_slug')
+        #placement_slug=request.POST.get('placement_slug')
         placement_company=request.POST.get('placement_company')
         placement_company=form.cleaned_data['placement_company']
-        print(placement_title,placement_slug,placement_company)
+        #print(placement_title,placement_slug,placement_company)
         #selected_user_defined_code = form.cleaned_data.get('user_defined_code')
         if form.is_valid():
 
-            Placement.objects.create(placement_title=placement_title,
-                                        placement_slug=placement_slug,
-                                        placement_company=placement_company)
+            Placement.objects.create(placement_title=placement_title,placement_company=placement_company)
 
             # process the data in form.cleaned_data as required
             # ...
@@ -208,7 +206,7 @@ def createbiddings(request):
 
 @permission_required("admin")
 def confirmbiddings(request):
-    total_nonconfirmed_bids = PlacementBid.objects.values( 'placement__placement_title','bid', 'bid_id', 'confirmed', 'id', 'offer', 'placement', 'placement_id','user__username', 'user_id').filter(confirmed=False)
+    total_nonconfirmed_bids = PlacementBid.objects.values( 'placement__placement_title','bid', 'bid_id', 'confirmed', 'id', 'offer', 'placement', 'placement_id','user__username', 'user_id').order_by('offer').filter(confirmed=False)
     #placement_name = Placement.objects.values('placement_title')
     #company_name = Company.objects.values('company_name')
     print(total_nonconfirmed_bids)

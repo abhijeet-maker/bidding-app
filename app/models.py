@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -25,7 +26,9 @@ class Placement(models.Model):
     """
 
     placement_title = models.CharField(max_length=255)
-    placement_slug = models.SlugField()
+    #placement_slug = models.SlugField()
+    placement_slug = AutoSlugField(populate_from='placement_title')
+
     placement_company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
 

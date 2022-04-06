@@ -15,7 +15,7 @@ class CustomRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 class BiddingCreationForm(forms.Form):
     placement_title = forms.CharField(label='Bid Title',max_length=255)
-    placement_slug = forms.SlugField(label='Bid ID')
+    #placement_slug = forms.SlugField(label='Bid ID')
     Company_CHOICES=[]
     #company=Company.objects.values('company_name')
 

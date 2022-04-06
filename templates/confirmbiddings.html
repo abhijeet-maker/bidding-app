@@ -1,11 +1,13 @@
 {% extends 'base.html' %} {% block content %} {% include 'admin_nav.html' %} {% load static %}
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
 
 <section class="section">
     <section class="container">
         <div class="card z-depth-2">
             <div class="card-content">
                 
-                <table id="result_list">
+                <table id="result_list" class="sortable">
 <thead>
 <tr>
 
@@ -14,14 +16,14 @@
 
 
 
-   <div class="text">User</a></div>
+   <div class="text">User</div>
    <div class="clear"></div>
 </th>
 <th scope="col" class="sortable column-offer">
 
 
 
-   <div class="text">Offer</a></div>
+   <div class="text">Offer</div>
    <div class="clear"></div>
 </th>
 
@@ -29,14 +31,14 @@
 
 
 
-   <div class="text">Placement</a></div>
+   <div class="text">Placement</div>
    <div class="clear"></div>
 </th>
 <th scope="col" class="sortable column-offer">
 
 
 
-   <div class="text">BID Id</a></div>
+   <div class="text">BID Id</div>
    <div class="clear"></div>
 </th>
 <th scope="col" class="action-checkbox-column">
@@ -53,7 +55,7 @@
     <td class="field-placement nowrap">{{ p.placement__placement_title }}</td>
    <td class="field-placement nowrap">{{ p.id }}</td>
     <td class="field-placement nowrap">{{ p.confirmed }}</td>
-    </script>
+
 </tr>
 {% endfor %}
 </tbody>
@@ -62,6 +64,7 @@
         </div>
     </section>
 </section>
+
 <footer class="page-footer indigo darken-2">
           <div class="container center custom-font-1">
           © 2019 Copyright Text
